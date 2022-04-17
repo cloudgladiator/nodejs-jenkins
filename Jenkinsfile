@@ -12,7 +12,8 @@ node {
       }  
     }
      stage('Push Image'){
-       docker.withRegistry('https://hub.docker.com/repository/docker/741041/docker-node', 'git') {            
+       docker.withRegistry('https://hub.docker.com/repository/docker/741041/docker-node', 'git') { 
+       docker push 741041/docker-node:741041/docker-node
        app.push("${env.BUILD_NUMBER}")            
        app.push("latest")   
    }
