@@ -27,7 +27,7 @@ node {
         stage('Push') {
 
 			steps {
-				sh 'docker push thetips4you/nodeapp_test:latest'
+				sh 'docker push 741041/docker-node:latest'
 			}
 		}
    }
