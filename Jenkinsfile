@@ -13,7 +13,7 @@ node {
     }
      stage('Push Image'){
        docker.withRegistry('https://hub.docker.com/repository/docker/741041/docker-node', 'git') { 
-       sh 'docker push 741041/docker-node:741041/docker-node'
+       sh 'docker push 741041/docker-node:latest'
        app.push("${env.BUILD_NUMBER}")            
        app.push("latest")   
    }
