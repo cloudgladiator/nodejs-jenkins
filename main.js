@@ -3,7 +3,7 @@ var app = express()
 
 //Define request response in root URL (/)
 app.get('/', function (req, res) {
-  res.send('Hello Welcome to Automateinfra.com')
+  res.send('Hello Welcome to Seekex Jenkins Pipeline infra.com')
 })
 
 
