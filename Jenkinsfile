@@ -1,5 +1,10 @@
 node {
      def app 
+
+     environment {
+		DOCKERHUB_CREDENTIALS=credentials('docker_hub')
+	}
+
      stage('clone repository') {
      checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/cloudgladiator/nodejs-jenkins.git']]])
     }
@@ -11,11 +16,19 @@ node {
          sh 'echo "TEST PASSED"' 
       }  
     }
-     stage('Push Image'){
-       docker.withRegistry('https://hub.docker.com/repository/docker/741041/docker-node', 'git') { 
-       sh 'docker push 741041/docker-node:latest'
-       app.push("${env.BUILD_NUMBER}")            
-       app.push("latest")   
+
+    stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+        stage('Push') {
+
+			steps {
+				sh 'docker push thetips4you/nodeapp_test:latest'
+			}
+		}
    }
-}
 }
